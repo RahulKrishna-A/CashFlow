@@ -24,7 +24,7 @@ router.post("/signup",async (req,res)=>{
     // console.log("1")
     if(!valid.success){
         return res.status(411).json({
-            message: "Email already taken / Incorrect input"
+            message: "Incorrect input"
         })
     }
 
@@ -34,7 +34,7 @@ router.post("/signup",async (req,res)=>{
 
     if (findinschema){
         return res.status(411).json({
-            message: "Email already taken / Incorrect inputs"
+            message: "Email already taken"
         })
     }
 
@@ -45,8 +45,8 @@ router.post("/signup",async (req,res)=>{
        lastName: req.body.lastName,
    });
 
-    const id = new_user._id;
-    const token = jwt.sign({id},JWT_SECRET)
+    const userId = new_user._id;
+    const token = jwt.sign({userId:userId},JWT_SECRET)
 
     return res.status(200).json({
         message: "User created successfully",
@@ -56,7 +56,41 @@ router.post("/signup",async (req,res)=>{
 
 //----------------------------------Handle SIGNIN
 
+const signin_zod = zod.object({
+    username:zod.string().email(),
+    password:zod.string()
+})
 
+
+router.post("/signin",async(req,res)=> {
+    const request = req.body
+    const valid = signin_zod.safeParse(request)
+    if (!valid.success) {
+        return res.status(411).json({
+            message: "Error while logging in"
+        })
+    }
+    const userExists = await User.findOne({
+        username: req.body.username,
+        password: req.body.password
+    })
+
+    if (!userExists) {
+        return res.status(411).json({
+            message: "Error while logging in"
+        })
+    }
+
+    if (userExists) {
+
+    const token = jwt.sign({userId: userExists._id}, JWT_SECRET)
+    return res.status(200).json({
+        token: token
+    })
+}
+
+
+})
 
 
 module.exports=router;
