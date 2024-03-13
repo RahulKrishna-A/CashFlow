@@ -15,12 +15,16 @@ const signupBody = zod.object({
 
 })
 
+// -----------------Handle SIGNUP
+
 router.post("/signup",async (req,res)=>{
         const valid = signupBody.safeParse(req.body)
-    // res.send(valid)
-    if(!valid){
-        res.status(411).json({
-            message: "Email already taken / Incorrect inputs"
+    // console.log(JWT_SECRET)
+    // res.send({a:"hi"})
+    // console.log("1")
+    if(!valid.success){
+        return res.status(411).json({
+            message: "Email already taken / Incorrect input"
         })
     }
 
@@ -29,7 +33,7 @@ router.post("/signup",async (req,res)=>{
     })
 
     if (findinschema){
-        res.status(411).json({
+        return res.status(411).json({
             message: "Email already taken / Incorrect inputs"
         })
     }
@@ -42,16 +46,15 @@ router.post("/signup",async (req,res)=>{
    });
 
     const id = new_user._id;
-    const token = jwt.sign(id,JWT_SECRET)
+    const token = jwt.sign({id},JWT_SECRET)
 
-    res.status(200).json({
+    return res.status(200).json({
         message: "User created successfully",
         token: token
     })
 })
 
-
-
+//----------------------------------Handle SIGNIN
 
 
 
