@@ -5,7 +5,7 @@ const {User} = require("../Mongodb")
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = require("../config")
-
+const {authMiddleware} = require("../Middleware")
 
 const signupBody = zod.object({
     username: zod.string().email(),
@@ -94,8 +94,26 @@ router.post("/signin",async(req,res)=> {
 
 // -------------------------------------
 
-router.get("/",(req,res)=>{
+const updateBody_Zod = zod.object({
+    password: zod.string().min(3),
+    firstName: zod.string().min(3),
+    lastName: zod.string(),
+})
 
+
+router.get("/",authMiddleware,async (req, res) => {
+    const valid = updateBody_Zod.safeParse(req.body)
+    if (!valid.success) {
+        return res.status(411).json({
+            message: "Error while updating information/Incorrect Inputs"
+        })
+    }
+
+    let updated = await User.updateOne({_id: req.userId}, req.body)
+
+    return res.status(200).json({
+        message : "updated successfully"
+    })
 })
 
 module.exports=router;
