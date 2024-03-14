@@ -95,9 +95,9 @@ router.post("/signin",async(req,res)=> {
 // -------------------------------------
 
 const updateBody_Zod = zod.object({
-    password: zod.string().min(3),
-    firstName: zod.string().min(3),
-    lastName: zod.string(),
+    password: zod.string().min(3).optional(),
+    firstName: zod.string().min(3).optional(),
+    lastName: zod.string().optional(),
 })
 
 
