@@ -101,7 +101,7 @@ const updateBody_Zod = zod.object({
 })
 
 
-router.get("/",authMiddleware,async (req, res) => {
+router.put("/",authMiddleware,async (req, res) => {
     const valid = updateBody_Zod.safeParse(req.body)
     if (!valid.success) {
         return res.status(411).json({
@@ -114,6 +114,37 @@ router.get("/",authMiddleware,async (req, res) => {
     return res.status(200).json({
         message : "updated successfully"
     })
+})
+
+
+// ----------------
+
+router.get("/bulk",authMiddleware,async(req,res)=>{
+    const filter_criteria = req.query.filter||"";
+
+    const q_result = await User.find({
+        $or: [{
+            firstName: {
+                "$regex": filter_criteria
+            }
+        }, {
+            lastName: {
+                "$regex": filter_criteria
+            }
+        }]
+    })
+
+    const out_result = q_result.map((ele)=>{
+        return {
+            username:ele.username,
+            firstName: ele.firstName,
+            lastName: ele.lastName,
+            _id: ele._id
+        }
+    })
+
+    res.status(200).json(out_result)
+    // users.find({"name": /.*m.*/})
 })
 
 module.exports=router;
