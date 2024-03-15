@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const zod = require("zod")
-const {User} = require("../Mongodb")
+const {User,Account} = require("../Mongodb")
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = require("../config")
@@ -47,6 +47,11 @@ router.post("/signup",async (req,res)=>{
 
     const userId = new_user._id;
     const token = jwt.sign({userId:userId},JWT_SECRET)
+
+    const user_Account = await Account.create({
+        userId:userId,
+        balance : Math.floor(Math.random()*10000) + 1
+    })
 
     return res.status(200).json({
         message: "User created successfully",
