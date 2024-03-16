@@ -37,14 +37,15 @@ router.post("/transfer",authMiddleware,async(req,res)=>{
     if(!customerTo){
         return res.status(400).json({message:"Invalid account"})
     }
-    await Account.updateOne({userID:transferFrom},{$inc:{
+    await Account.updateOne({userId:transferFrom},{$inc:{
         balance : -transferAmount
         }}).session(session)
 
-    await Account.updateOne({userID:transferTo},{$inc:{
+    await Account.updateOne({userId:transferTo},{$inc:{
             balance : transferAmount
         }}).session(session)
     await session.commitTransaction()
+    session.endSession()
     return res.status(200).json("Transfer successful")
 
 
