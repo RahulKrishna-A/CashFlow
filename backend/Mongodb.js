@@ -1,5 +1,16 @@
 const mongoose = require("mongoose");
-mongoose.connect(`mongodb+srv://rahulkrish321123:JHra0EQk0rR1ID2p@cashfree.uhuvrek.mongodb.net/`)
+
+const {MONGO_URI} = require("./config")
+
+async function connectToDB() {
+try {
+    await mongoose.connect(MONGO_URI)
+    await console.log("Connected to DB")
+}
+catch (err){
+    console.log("error connecting to DB")
+}
+}
 
 
 const userSchema = new mongoose.Schema({
@@ -57,5 +68,6 @@ const Account = mongoose.model("Account",Account_schema)
 
 module.exports={
     User,
-    Account
+    Account,
+    connectToDB
 }
