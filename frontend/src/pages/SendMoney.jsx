@@ -1,12 +1,20 @@
-import { useSearchParams } from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import axios from "axios";
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 
 export const SendMoney = () => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
     const name = searchParams.get("name");
     const [amount, setAmount] = useState(0);
+
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(!localStorage.getItem("token")){
+            navigate("/signin")
+        }
+    }, []);
 
     return <div className="flex justify-center h-screen bg-gray-100">
         <div className="h-full flex flex-col justify-center">
