@@ -49,18 +49,22 @@ export const SendMoney = () => {
                         placeholder="Enter amount"
                     />
                     </div>
-                    <button onClick={() => {
-                        try{
-                        axios.post("http://localhost:3000/api/v1/account/transfer", {
-                            to: id,
-                            amount
-                        }, {
-                            headers: {
-                                Authorization: "Bearer " + localStorage.getItem("token")
-                            }
-                        })}catch (err){
+                    <button onClick={async () => {
+                        try {
+                            await axios.post("http://localhost:3000/api/v1/account/transfer", {
+                                to: id,
+                                amount
+                            }, {
+                                headers: {
+                                    Authorization: "Bearer " + localStorage.getItem("token")
+                                }
+                            }.then(
+                                    navigate("/dashboard"))
+                            )
+                        } catch (err) {
                             console.log(err)
-                    }}} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
+                        }
+                    }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
                         Initiate Transfer
                     </button>
                 </div>

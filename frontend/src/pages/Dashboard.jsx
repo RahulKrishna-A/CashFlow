@@ -21,17 +21,17 @@ export const Dashboard = () => {
     }, []);
 
 
-    useEffect(()=>{
-        axios.get("http://localhost:3000/api/v1/account/balance",{
-            headers: {
-                Authorization: "Bearer " + token
-            }
-        })
-            .then(response => {
-                setBalance(response.data.balance)
-                // console.log(response)
+    useEffect(async () => {
+            await axios.get("http://localhost:3000/api/v1/account/balance", {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
             })
-    }
+                .then(response => {
+                    setBalance(response.data.balance)
+                    // console.log(response)
+                })
+        }
 
     ,[token])
 
