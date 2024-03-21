@@ -45,7 +45,7 @@ router.post("/transfer",authMiddleware,async(req,res)=>{
             balance : transferAmount
         }}).session(session)
     await session.commitTransaction()
-    await session.endSession()
+
     return res.status(200).json("Transfer successful")
 
 
