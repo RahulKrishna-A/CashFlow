@@ -7,6 +7,8 @@ import { SubHeading } from "../components/SubHeading"
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
 import {signup} from "../apicalls.js";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Signup(){
     const [firstName, setFirstName] = useState("");
@@ -23,18 +25,40 @@ export default function Signup(){
             password)
 
         if (response === "Incorrect input"){
-
+            console.log("Sd")
+            toast.error("Invalid Details", {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
         }
         if(response.token){
+            toast.success("User Created Successfully", {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
 
+            localStorage.setItem("token", response.token)
+            navigate("/dashboard")
         }
 
 
-        // localStorage.setItem("token", response.data.token)
-        // navigate("/dashboard")
+
     }
 
     return <div className="bg-slate-300 h-screen flex justify-center">
+        <ToastContainer/>
     <div className="flex flex-col justify-center">
       <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
         <Heading label={"Sign up"} />

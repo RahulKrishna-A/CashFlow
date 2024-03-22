@@ -33,7 +33,7 @@ export const signup = async (username, firstName, lastName, password) => {
         return res.data
     }
     catch (err){
-        // console.log(err.response.data.message)
+        console.log(err.response.data.message)
         return (err.response.data.message)
     }
 
