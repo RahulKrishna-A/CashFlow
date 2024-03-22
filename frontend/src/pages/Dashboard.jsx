@@ -3,9 +3,14 @@ import { Balance } from "../components/Balance"
 import { Users } from "../components/Users"
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+// import { useHistory } from 'react-router-dom';
 import axios from "axios";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const Dashboard = () => {
+
 
     const [token,setToken] = useState(0)
     console.log(token)
@@ -20,6 +25,25 @@ export const Dashboard = () => {
             setToken(localStorage.getItem("token"))
         }
     }, []);
+
+
+    useEffect(() => {
+
+        if(balance){
+        toast.info(`Your balance is ${balance}`, {
+            position: "top-right",
+            autoClose: 4000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        })}
+
+
+
+    }, [balance]);
 
 
     useEffect(() => {
@@ -38,6 +62,7 @@ export const Dashboard = () => {
 
 
     return <div>
+        <ToastContainer/>
         <Appbar />
         <div className="m-8">
             <Balance value={balance} />
