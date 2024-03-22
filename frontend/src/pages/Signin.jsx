@@ -14,6 +14,17 @@ export default function  Signin()  {
 
     async function onClickSignin(){
        const value = await signin(username,password)
+        if(value==="No user exists"){
+
+        }
+        if(value==="Error while logging in"){
+
+        }
+        if(value.data){
+            localStorage.setItem("token", response.data.token)
+            navigate("/dashboard")
+        }
+
     }
 
 
