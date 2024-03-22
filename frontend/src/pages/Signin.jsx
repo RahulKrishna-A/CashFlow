@@ -73,10 +73,10 @@ export default function  Signin()  {
         <SubHeading label={"Enter your credentials to access your account"} />
           <InputBox onChange={e => {
               setUsername(e.target.value);
-          }} placeholder="harkirat@gmail.com" label={"Email"} />
+          }} placeholder="Rahul@gmail.com" label={"Email"} />
           <InputBox onChange={(e) => {
               setPassword(e.target.value)
-          }} placeholder="123456" label={"Password"} />
+          }} placeholder="q23!@1023" label={"Password"} />
         <div className="pt-4">
           <Button label={"Sign in"}  onClick={onClickSignin}/>
         </div>

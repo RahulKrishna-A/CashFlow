@@ -25,7 +25,7 @@ export default function Signup(){
             password)
 
         if (response === "Incorrect input"){
-            console.log("Sd")
+            // console.log("Sd")
             toast.error("Invalid Details", {
                 position: "top-right",
                 autoClose: 4000,
@@ -65,16 +65,16 @@ export default function Signup(){
         <SubHeading label={"Enter your information to create an account"} />
         <InputBox onChange={e => {
           setFirstName(e.target.value);
-        }} placeholder="John" label={"First Name"} />
+        }} placeholder="Rahul" label={"First Name"} />
         <InputBox onChange={(e) => {
           setLastName(e.target.value);
-        }} placeholder="Doe" label={"Last Name"} />
+        }} placeholder="Krish" label={"Last Name"} />
         <InputBox onChange={e => {
           setUsername(e.target.value);
-        }} placeholder="harkirat@gmail.com" label={"Email"} />
+        }} placeholder="rahul@gmail.com" label={"Email"} />
         <InputBox onChange={(e) => {
           setPassword(e.target.value)
-        }} placeholder="123456" label={"Password"} />
+        }} placeholder="q!@2024" label={"Password"} />
         <div className="pt-4">
           <Button onClick={onclickSignin
 
