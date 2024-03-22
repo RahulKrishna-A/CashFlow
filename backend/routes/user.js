@@ -10,7 +10,7 @@ const {authMiddleware} = require("../Middleware")
 const signupBody = zod.object({
     username: zod.string().email(),
     firstName:zod.string().min(1),
-    lastName:zod.string().optional(),
+    lastName:zod.string().min(1),
     password:zod.string().min(3)
 
 })
@@ -19,6 +19,7 @@ const signupBody = zod.object({
 
 router.post("/signup",async (req,res)=>{
         const valid = signupBody.safeParse(req.body)
+    // console.log(valid)
     if(!valid.success){
         return res.status(411).json({
             message: "Incorrect input"
@@ -35,11 +36,12 @@ router.post("/signup",async (req,res)=>{
         })
     }
 
+
    const new_user = await User.create({
        username: req.body.username,
        password: req.body.password,
        firstName: req.body.firstName,
-       lastName: req.body.lastName?req.body.lastName:"",
+       lastName: req.body.lastName,
    });
 
     const userId = new_user._id;
