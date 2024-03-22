@@ -6,6 +6,7 @@ import { InputBox } from "../components/InputBox"
 import { SubHeading } from "../components/SubHeading"
 import axios from "axios";
 import { useNavigate } from "react-router-dom"
+import {signup} from "../apicalls.js";
 
 export default function Signup(){
     const [firstName, setFirstName] = useState("");
@@ -13,6 +14,25 @@ export default function Signup(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+
+
+    async function onclickSignin() {
+        const response = await signup(username,
+            firstName,
+            lastName,
+            password)
+
+        if (response === "Incorrect input"){
+
+        }
+        if(response.token){
+
+        }
+
+
+        // localStorage.setItem("token", response.data.token)
+        // navigate("/dashboard")
+    }
 
     return <div className="bg-slate-300 h-screen flex justify-center">
     <div className="flex flex-col justify-center">
@@ -32,16 +52,9 @@ export default function Signup(){
           setPassword(e.target.value)
         }} placeholder="123456" label={"Password"} />
         <div className="pt-4">
-          <Button onClick={async () => {
-            const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
-              username,
-              firstName,
-              lastName,
-              password
-            });
-            localStorage.setItem("token", response.data.token)
-            navigate("/dashboard")
-          }} label={"Sign up"} />
+          <Button onClick={onclickSignin
+
+          } label={"Sign up"} />
         </div>
         <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
       </div>
