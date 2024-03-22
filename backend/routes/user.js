@@ -39,7 +39,7 @@ router.post("/signup",async (req,res)=>{
        username: req.body.username,
        password: req.body.password,
        firstName: req.body.firstName,
-       lastName: req.body.lastName,
+       lastName: req.body.lastName?req.body.lastName:"",
    });
 
     const userId = new_user._id;
