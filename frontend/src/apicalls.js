@@ -33,9 +33,24 @@ export const signup = async (username, firstName, lastName, password) => {
         return res.data
     }
     catch (err){
-        console.log(err.response.data.message)
+        // console.log(err.response.data.message)
         return (err.response.data.message)
     }
+
+
+}
+
+
+export const getBalance = async(token)=>{
+
+    const url = `${BASE_URL}/api/v1/account/balance`
+    const res = await axios.get(url, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
+
+    return res.data.balance
 
 
 }

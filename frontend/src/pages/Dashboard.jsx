@@ -8,12 +8,13 @@ import axios from "axios";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {getBalance} from "../apicalls.js";
 
 export const Dashboard = () => {
 
 
     const [token,setToken] = useState(0)
-    console.log(token)
+    // console.log(token)
     const [balance,setBalance] = useState(0)
 
     const navigate = useNavigate();
@@ -46,17 +47,15 @@ export const Dashboard = () => {
     }, [balance]);
 
 
-    useEffect(() => {
-            axios.get("http://localhost:3000/api/v1/account/balance", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-                .then(response => {
-                    setBalance(response.data.balance)
-                    // console.log(response)
-                })
+    useEffect(()=>{
+        async function start(){
+                    const response =await getBalance(token)
+                    await setBalance(response)
         }
+        if(!!token){
+        start()}
+        }
+
 
     ,[token])
 
