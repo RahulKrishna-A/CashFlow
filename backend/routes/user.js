@@ -9,7 +9,7 @@ const {authMiddleware} = require("../Middleware")
 
 const signupBody = zod.object({
     username: zod.string().email(),
-    firstName:zod.string().min(3),
+    firstName:zod.string().min(1),
     lastName:zod.string().optional(),
     password:zod.string().min(3)
 

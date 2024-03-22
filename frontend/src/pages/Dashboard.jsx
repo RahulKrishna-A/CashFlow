@@ -8,6 +8,7 @@ import axios from "axios";
 export const Dashboard = () => {
 
     const [token,setToken] = useState(0)
+    console.log(token)
     const [balance,setBalance] = useState(0)
 
     const navigate = useNavigate();
@@ -21,10 +22,10 @@ export const Dashboard = () => {
     }, []);
 
 
-    useEffect(async () => {
-            await axios.get("http://localhost:3000/api/v1/account/balance", {
+    useEffect(() => {
+            axios.get("http://localhost:3000/api/v1/account/balance", {
                 headers: {
-                    Authorization: "Bearer " + token
+                    Authorization: `Bearer ${token}`
                 }
             })
                 .then(response => {
