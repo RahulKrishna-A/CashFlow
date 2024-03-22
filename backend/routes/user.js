@@ -68,7 +68,7 @@ router.post("/signin",async(req,res)=> {
     const request = req.body
     const valid = signin_zod.safeParse(request)
     if (!valid.success) {
-        return res.status(411).json({
+        return res.status(400).json({
             message: "Error while logging in"
         })
     }
@@ -79,7 +79,7 @@ router.post("/signin",async(req,res)=> {
 
     if (!userExists) {
         return res.status(411).json({
-            message: "Error while logging in"
+            message: "No user exists"
         })
     }
 
