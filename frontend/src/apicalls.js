@@ -54,3 +54,20 @@ export const getBalance = async(token)=>{
 
 
 }
+
+
+export const transferMoney = async (token,to,amount)=>{
+    const url = `${BASE_URL}/api/v1/account/transfer`
+    try{
+        const res = await axios.post(url,{to:to,amount:amount},{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        return res.data
+    }catch (err){
+console.log(err)
+        return err.response.data.message
+    }
+
+}

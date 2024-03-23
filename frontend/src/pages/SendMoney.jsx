@@ -1,15 +1,37 @@
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import axios from "axios";
 import {useEffect, useState} from 'react';
+import {transferMoney} from "../apicalls.js";
 
 export const SendMoney = () => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
     const name = searchParams.get("name");
     const [amount, setAmount] = useState(0);
-
-
     const navigate = useNavigate();
+
+    async function onClickSendMoney(){
+        if(!amount){
+            console.log("enter a amount")
+            return
+        }
+
+        const response = await transferMoney(localStorage.getItem("token"),id,amount)
+        if(response==="Insufficient Funds"){ /* empty */
+            console.log("Insufficient Funds")
+            return
+        }
+        if(response==="Transfer successful"){
+            console.log("Successfully Transferred")
+
+            setTimeout(()=>{
+                navigate("/dashboard")
+            },1000)
+        }
+
+
+
+    }
     useEffect(() => {
         if(!localStorage.getItem("token")){
             navigate("/signin")
@@ -49,22 +71,22 @@ export const SendMoney = () => {
                         placeholder="Enter amount"
                     />
                     </div>
-                    <button onClick={() => {
-                        try {
-                             axios.post("http://localhost:3000/api/v1/account/transfer", {
-                                to: id,
-                                amount
-                            }, {
-                                headers: {
-                                    Authorization: "Bearer " + localStorage.getItem("token")
-                                }
-                            }.then(
-                                    navigate("/dashboard"))
-                            )
-                        } catch (err) {
-                            console.log(err)
-                        }
-                    }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
+                    <button onClick={onClickSendMoney
+                        // try {
+                        //      axios.post("http://localhost:3000/api/v1/account/transfer", {
+                        //         to: id,
+                        //         amount
+                        //     }, {
+                        //         headers: {
+                        //             Authorization: "Bearer " + localStorage.getItem("token")
+                        //         }
+                        //     }.then(
+                        //             navigate("/dashboard"))
+                        //     )
+                        // } catch (err) {
+                        //     console.log(err)
+                        // }
+                    } className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
                         Initiate Transfer
                     </button>
                 </div>
