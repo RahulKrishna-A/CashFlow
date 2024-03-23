@@ -4,6 +4,7 @@ import {useEffect, useState} from 'react';
 import {transferMoney} from "../apicalls.js";
 // import {toast} from "react-toastify";
 import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SendMoney = () => {
     const [searchParams] = useSearchParams();
@@ -14,7 +15,7 @@ export const SendMoney = () => {
 
     async function onClickSendMoney() {
         if (!amount) {
-            toast.info(`Your balance is ${balance}`, {
+            toast.error(`Please enter an amount`, {
                 position: "top-right",
                 autoClose: 4000,
                 hideProgressBar: false,
@@ -24,26 +25,45 @@ export const SendMoney = () => {
                 progress: undefined,
                 theme: "light",
             })
+            return
         }
 
-        return
+
+
+
+        const response = await transferMoney(localStorage.getItem("token"), id, amount)
+        if (response === "Insufficient Funds") { /* empty */
+            toast.error(`Insufficient Funds`, {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+            return
+        }
+        if (response === "Transfer successful") {
+            toast.success(`Funds transferred Successfully `, {
+                position: "top-right",
+                autoClose: 4000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+
+            setTimeout(() => {
+                navigate("/dashboard")
+            }, 1000)
+        }
     }
 
-    const response = await transferMoney(localStorage.getItem("token"), id, amount)
-    if (response === "Insufficient Funds") { /* empty */
-        console.log("Insufficient Funds")
-        return
-    }
-    if (response === "Transfer successful") {
-        console.log("Successfully Transferred")
 
-        setTimeout(() => {
-            navigate("/dashboard")
-        }, 1000)
-    }
-
-
-}
 useEffect(() => {
     if (!localStorage.getItem("token")) {
         navigate("/signin")
@@ -51,6 +71,7 @@ useEffect(() => {
 }, []);
 
 return <div className="flex justify-center h-screen bg-gray-100">
+    <ToastContainer/>
     <div className="h-full flex flex-col justify-center">
         <div
             className="border h-min text-card-foreground max-w-md p-4 space-y-8 w-96 bg-white shadow-lg rounded-lg"
