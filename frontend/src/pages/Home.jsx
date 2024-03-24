@@ -29,7 +29,26 @@ export default function Home(){
                 </div>
 
             </div>
+            <div>
+            <div className={"w-[50%] mt-[10vh]"}>
+                <div className={"text-gray-500 text-sm "}>
+                    <div>💰 Seamless Payments. Effortless Transactions.</div>
+                </div>
+                <div className={"text-6xl font-bold mt-4"}>
+                    Online payments for <a className={"text-gray-500"}>everyone.</a>
+                </div>
+                <div className={"mt-9 max-w-[70%] font-bold text-gray-600 "}>
+                    Revolutionize Your Financial Experience: Effortlessly Manage Payments and Empower Your Transactions with Our State-of-the-Art Platform!
+                </div>
 
+                <button className={"px-8 py-6 mt-20 bg-green-700 text-white text-xl font-bold rounded-3xl"}>
+                    Get Started
+                </button>
+            </div>
+            <div>
+
+            </div>
+            </div>
         </div>
     )
 }
