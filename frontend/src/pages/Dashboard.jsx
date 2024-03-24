@@ -30,7 +30,7 @@ export const Dashboard = () => {
     useEffect(() => {
 
         if (balance) {
-            toast.info(`Your balance is ${balance}`, {
+            toast.info(`Your balance is $ ${balance}`, {
                 position: "top-right",
                 autoClose: 4000,
                 hideProgressBar: false,

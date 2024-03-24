@@ -33,7 +33,7 @@ export const Appbar = () => {
             </div>
         </div>
         <div className="flex">
-            <div className=" font-bold text-xl  flex flex-col justify-center h-full mr-4  ">
+            <div className=" sm:font-bold sm:text-xl  flex flex-col justify-center h-full mr-4  ">
                 Hello!
             </div>
             {/*<div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">*/}
@@ -41,7 +41,7 @@ export const Appbar = () => {
             {/*        <AccountCircleIcon/>*/}
             {/*    </div>*/}
             {/*</div>*/}
-            <div onClick={onClickLogout} className={"font-semibold text-xl flex gap-2 justify-center items-center mr-4 cursor-pointer"}>
+            <div onClick={onClickLogout} className={"sm:font-semibold sm:text-xl  flex gap-2 justify-center items-center mr-4 cursor-pointer"}>
                 Logout
                 <LogoutIcon/>
             </div>
