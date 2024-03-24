@@ -12,6 +12,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { SendMoney } from "./pages/SendMoney";
 import Loading from "./pages/Loading.jsx";
 import Notfound from "./pages/Notfound.jsx";
+import Home from "./pages/Home.jsx";
 
 const Signin  = React.lazy(()=>import("./pages/Signin"))
 const Signup  = React.lazy(()=>import("./pages/Signup"))
@@ -25,6 +26,7 @@ function App() {
             <Route exact path="/signin" element={<Suspense fallback={<Loading/>}> <Signin /></Suspense>} />
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/send" element={<SendMoney />} />
+            <Route exact path="/" element={<Home/>} />
             <Route path={"*"} element={<Notfound/>}/>
         </Routes>
       </BrowserRouter>
