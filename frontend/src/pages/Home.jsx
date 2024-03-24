@@ -1,7 +1,11 @@
 import heroImage from "../assets/HeroImage.png"
+import {useNavigate} from "react-router-dom";
 
 
 export default function Home(){
+
+    const navigate = useNavigate()
+
     return(
         <div className={" w-screen px-6 sm:px-12 py-8 "}>
             <div className={"flex items-center fill-[#0b8507]"}>
@@ -22,10 +26,10 @@ export default function Home(){
                     CashFlow<a className={"text-green-600"}>.</a>
                 </div>
                 <div className={"flex  ml-auto gap-4 items-center"}>
-                    <div className={"text-green-500  font-semibold sm:font-bold  underline hover:text-green-700 cursor-pointer leading-3 "} >
+                    <div onClick={()=>{navigate("/signup")}} className={"text-green-500  font-semibold sm:font-bold  underline hover:text-green-700 cursor-pointer leading-3 "} >
                         Register
                     </div>
-                    <div className={"" }>
+                    <div onClick={()=>{navigate("/signin")}}  className={""}>
                         <button className={"bg-black sm:py-3 sm:px-5 py-2 px-2 text-white  sm:rounded-2xl  rounded-xl hover:scale-105 transition-all duration-200"}>Sign in</button>
                     </div>
 
@@ -44,7 +48,9 @@ export default function Home(){
                     Revolutionize Your Financial Experience: Effortlessly Manage Payments and Empower Your Transactions with Our State-of-the-Art Platform!
                 </div>
 
-                <button className={"px-6 py-4 sm:px-8 sm:py-6 mt-20 bg-green-700 text-white sm:text-xl font-bold rounded-3xl"}>
+                <button onClick={()=>{
+                    navigate("/signup")
+                }}  className={"px-6 py-4 sm:px-8 sm:py-6 mt-20 bg-green-700 text-white sm:text-xl font-bold rounded-3xl"}>
                     Get Started
                 </button>
             </div>
