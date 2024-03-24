@@ -65,10 +65,10 @@ export default function Signin() {
     }
 
 
-    return <div className="bg-slate-300 h-screen flex justify-center">
+    return <div className="bg-slate-100  h-screen flex justify-center">
         <ToastContainer/>
-        <div className="flex flex-col justify-center">
-            <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4">
+        <div className="flex flex-col justify-center ">
+            <div className="rounded-lg bg-white w-80 text-center p-2 h-max px-4 shadow-2xl">
                 <Heading label={"Sign in"}/>
                 <SubHeading label={"Enter your credentials to access your account"}/>
                 <InputBox onChange={e => {
