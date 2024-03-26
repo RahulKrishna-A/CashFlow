@@ -14,7 +14,7 @@ export const SendMoney = () => {
     const navigate = useNavigate();
 
     async function onClickSendMoney() {
-        if (!amount) {
+        if (!amount || amount<0) {
             toast.error(`Please enter an amount`, {
                 position: "top-right",
                 autoClose: 4000,
