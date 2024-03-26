@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASE_URL = 'http://localhost:3000'
-const BASE_URL = 'https://cashflow-pn2p.onrender.com'
+const BASE_URL = 'https://cash-flow-five.vercel.app'
 
 
 export const signin = async (username, password) => {
