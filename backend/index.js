@@ -14,3 +14,5 @@ app.use(express.json())
 app.use("/api/v1",router)
 
 app.listen(port,()=>console.log(`started listening on port${port}`))
+
+module.exports = app;
