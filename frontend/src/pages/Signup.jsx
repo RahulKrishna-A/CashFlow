@@ -64,16 +64,16 @@ export default function Signup() {
                 <SubHeading label={"Enter your information to create an account"}/>
                 <InputBox onChange={e => {
                     setFirstName(e.target.value);
-                }} placeholder="Rahul" label={"First Name"}/>
+                }} placeholder="Rahul" label={"First Name*"}/>
                 <InputBox onChange={(e) => {
                     setLastName(e.target.value);
-                }} placeholder="Krish" label={"Last Name"}/>
+                }} placeholder="Krish" label={"Last Name*"}/>
                 <InputBox onChange={e => {
                     setUsername(e.target.value);
-                }} placeholder="rahul@gmail.com" label={"Email"}/>
+                }} placeholder="rahul@gmail.com" label={"Email*"}/>
                 <InputBox onChange={(e) => {
                     setPassword(e.target.value)
-                }} placeholder="q!@2024" label={"Password"}/>
+                }} placeholder="q!@2024" label={"Password*"}/>
                 <div className="pt-4">
                     <Button onClick={onclickSignin
 
